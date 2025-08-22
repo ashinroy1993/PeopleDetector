@@ -18,6 +18,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  publicRuntimeConfig: {
+    BLOB_READ_WRITE_TOKEN:
+      'vercel_blob_rw_YpsJxEvyCQKS0S0S_K1XCafyic3NfQLnbuFBDAO3yiBbVwz',
+  },
 };
 
 export default nextConfig;

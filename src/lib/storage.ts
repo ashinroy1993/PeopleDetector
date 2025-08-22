@@ -1,7 +1,7 @@
 'use server';
 
-import { put, head, del } from '@vercel/blob';
-import { NextResponse } from 'next/server';
+import { put, head } from '@vercel/blob';
+import getConfig from 'next/config';
 
 type Direction = 'left' | 'center' | 'right' | 'everywhere';
 
@@ -12,6 +12,9 @@ export interface AnalysisRecord {
 }
 
 const BLOB_FILENAME = 'analysis.json';
+
+const { publicRuntimeConfig } = getConfig();
+const BLOB_READ_WRITE_TOKEN = publicRuntimeConfig.BLOB_READ_WRITE_TOKEN;
 
 /**
  * Stores the latest analysis record in Vercel Blob storage.
@@ -24,6 +27,7 @@ export async function addAnalysis(record: Omit<AnalysisRecord, 'timestamp'>): Pr
       access: 'public',
       contentType: 'application/json',
       addRandomSuffix: false, // Ensure we overwrite the same file
+      token: BLOB_READ_WRITE_TOKEN
     });
   } catch (error) {
     console.error('Error uploading to Vercel Blob:', error);
@@ -37,7 +41,7 @@ export async function addAnalysis(record: Omit<AnalysisRecord, 'timestamp'>): Pr
  */
 export async function getLatestAnalysis(): Promise<AnalysisRecord | null> {
   try {
-    const blobUrl = (await head(BLOB_FILENAME)).url;
+    const blobUrl = (await head(BLOB_FILENAME, { token: BLOB_READ_WRITE_TOKEN })).url;
     const response = await fetch(blobUrl);
 
     if (response.ok) {
@@ -51,7 +55,7 @@ export async function getLatestAnalysis(): Promise<AnalysisRecord | null> {
     throw new Error(`Failed to fetch analysis data: ${response.statusText}`)
 
   } catch (error: any) {
-    if (error?.status === 404) {
+    if (error?.status === 404 || error?.message?.includes('404')) {
       // File doesn't exist yet, return default state
       return null;
     }
