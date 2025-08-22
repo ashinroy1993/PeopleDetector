@@ -25,7 +25,7 @@ export default function CrowdAnalysisClient() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { toast } = useToast();
 
   const stopCamera = useCallback(() => {
@@ -36,19 +36,20 @@ export default function CrowdAnalysisClient() {
     if (videoRef.current) {
       videoRef.current.srcObject = null;
     }
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
     setIsCameraOn(false);
     setIsLoading(false);
+    setAnalysisResult(null);
   }, []);
 
   const startCamera = useCallback(async () => {
     try {
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: "user" },
+          video: true,
         });
         streamRef.current = stream;
         if (videoRef.current) {
@@ -78,7 +79,7 @@ export default function CrowdAnalysisClient() {
       stopCamera();
     }
   }, [toast, stopCamera]);
-
+  
   const performAnalysis = useCallback(async () => {
     if (!videoRef.current || !canvasRef.current || videoRef.current.paused || videoRef.current.ended) {
       return;
@@ -111,12 +112,25 @@ export default function CrowdAnalysisClient() {
   }, [toast, stopCamera]);
 
   useEffect(() => {
-    if (isCameraOn && !intervalRef.current) {
-      intervalRef.current = setInterval(performAnalysis, ANALYSIS_INTERVAL);
+    const analysisLoop = async () => {
+        if(isCameraOn) {
+            await performAnalysis();
+            timeoutRef.current = setTimeout(analysisLoop, ANALYSIS_INTERVAL);
+        }
     }
+    if (isCameraOn) {
+      analysisLoop();
+    } else {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+    }
+
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
       }
     };
   }, [isCameraOn, performAnalysis]);
@@ -184,8 +198,8 @@ export default function CrowdAnalysisClient() {
                 </div>
               </div>
               <div className="mt-6">
-                <Button onClick={toggleCamera} className="w-full" disabled={isLoading && isCameraOn}>
-                  {isLoading && isCameraOn ? (
+                <Button onClick={toggleCamera} className="w-full" disabled={isLoading}>
+                  {isLoading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                       Analyzing...

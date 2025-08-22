@@ -388,5 +388,115 @@
     "direction": "front",
     "confidence": 1,
     "timestamp": 1755848502823
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755848609923
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755848623148
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755848627889
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755848628301
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755848632861
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755848638375
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755848643127
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755848648011
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755848890771
+  },
+  {
+    "direction": "everywhere",
+    "confidence": 0.00009023131231231231,
+    "timestamp": 1755848956334
+  },
+  {
+    "direction": "front",
+    "confidence": 0.987654321,
+    "timestamp": 1755848959368
+  },
+  {
+    "direction": "everywhere",
+    "confidence": 1,
+    "timestamp": 1755848962412
+  },
+  {
+    "direction": "everywhere",
+    "confidence": 0.00009876543219876543,
+    "timestamp": 1755848965077
+  },
+  {
+    "direction": "everywhere",
+    "confidence": 9.999999999999997e-7,
+    "timestamp": 1755848968379
+  },
+  {
+    "direction": "everywhere",
+    "confidence": 1,
+    "timestamp": 1755848971527
+  },
+  {
+    "direction": "right",
+    "confidence": 1,
+    "timestamp": 1755848974240
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755848977160
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755848979856
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755848982514
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755848985543
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755848989107
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755849021904
   }
 ]
