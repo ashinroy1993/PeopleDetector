@@ -668,5 +668,50 @@
     "direction": "front",
     "confidence": 1,
     "timestamp": 1755849974225
+  },
+  {
+    "direction": "right",
+    "confidence": 1,
+    "timestamp": 1755850081356
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850091006
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850100211
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850109243
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850119290
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850127998
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850136219
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850145054
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850153802
   }
 ]

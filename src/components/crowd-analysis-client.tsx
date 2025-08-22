@@ -14,7 +14,10 @@ import {
   VideoOff,
   CameraOff,
   Loader2,
+  SwitchCamera,
 } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
 
 const ANALYSIS_INTERVAL = 5000; // 5 seconds
 
@@ -22,11 +25,30 @@ export default function CrowdAnalysisClient() {
   const [isCameraOn, setIsCameraOn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
+  const [videoDevices, setVideoDevices] = useState<MediaDeviceInfo[]>([]);
+  const [selectedDeviceId, setSelectedDeviceId] = useState<string | undefined>(undefined);
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { toast } = useToast();
+
+  const getVideoDevices = useCallback(async () => {
+    try {
+      if (!navigator.mediaDevices?.enumerateDevices) {
+        console.log("enumerateDevices() not supported.");
+        return;
+      }
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      const videoInputs = devices.filter((device) => device.kind === 'videoinput');
+      setVideoDevices(videoInputs);
+      if (videoInputs.length > 0 && !selectedDeviceId) {
+        setSelectedDeviceId(videoInputs[0].deviceId);
+      }
+    } catch (err) {
+      console.error("Error enumerating video devices:", err);
+    }
+  }, [selectedDeviceId]);
 
   const stopCamera = useCallback(() => {
     if (streamRef.current) {
@@ -45,12 +67,14 @@ export default function CrowdAnalysisClient() {
     setAnalysisResult(null);
   }, []);
 
-  const startCamera = useCallback(async () => {
+  const startCamera = useCallback(async (deviceId?: string) => {
+    stopCamera(); // Stop any existing stream
     try {
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          video: true,
-        });
+        const constraints: MediaStreamConstraints = {
+          video: deviceId ? { deviceId: { exact: deviceId } } : true,
+        };
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
         streamRef.current = stream;
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
@@ -62,6 +86,7 @@ export default function CrowdAnalysisClient() {
           };
         }
         setIsCameraOn(true);
+        await getVideoDevices(); // Refresh device list after getting permission
       } else {
         throw new Error("Camera not supported");
       }
@@ -78,7 +103,7 @@ export default function CrowdAnalysisClient() {
       });
       stopCamera();
     }
-  }, [toast, stopCamera]);
+  }, [toast, stopCamera, getVideoDevices]);
   
   const performAnalysis = useCallback(async () => {
     if (!videoRef.current || !canvasRef.current || videoRef.current.paused || videoRef.current.ended) {
@@ -135,6 +160,9 @@ export default function CrowdAnalysisClient() {
     };
   }, [isCameraOn, performAnalysis]);
 
+  useEffect(() => {
+    getVideoDevices();
+  }, [getVideoDevices]);
 
   useEffect(() => {
     return () => stopCamera();
@@ -144,9 +172,17 @@ export default function CrowdAnalysisClient() {
     if (isCameraOn) {
       stopCamera();
     } else {
-      startCamera();
+      startCamera(selectedDeviceId);
     }
   };
+
+  const handleCameraChange = (deviceId: string) => {
+    setSelectedDeviceId(deviceId);
+    if (isCameraOn) {
+      startCamera(deviceId);
+    }
+  };
+
 
   return (
     <div className="w-full">
@@ -197,7 +233,7 @@ export default function CrowdAnalysisClient() {
                   </Card>
                 </div>
               </div>
-              <div className="mt-6">
+              <div className="mt-6 flex flex-col sm:flex-row gap-2">
                 <Button onClick={toggleCamera} className="w-full" disabled={isLoading}>
                   {isLoading ? (
                     <>
@@ -216,6 +252,21 @@ export default function CrowdAnalysisClient() {
                     </>
                   )}
                 </Button>
+                 {videoDevices.length > 1 && (
+                  <Select onValueChange={handleCameraChange} value={selectedDeviceId} disabled={isLoading}>
+                    <SelectTrigger className="w-full sm:w-[200px]">
+                      <SwitchCamera className="mr-2 h-4 w-4"/>
+                      <SelectValue placeholder="Select camera" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {videoDevices.map((device) => (
+                        <SelectItem key={device.deviceId} value={device.deviceId}>
+                          {device.label || `Camera ${videoDevices.indexOf(device) + 1}`}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
               </div>
             </div>
           </div>
