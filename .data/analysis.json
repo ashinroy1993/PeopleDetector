@@ -593,5 +593,80 @@
     "direction": "front",
     "confidence": 1,
     "timestamp": 1755849199419
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755849652588
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755849661239
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755849669774
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755849678609
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755849687766
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755849696596
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755849705213
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755849877097
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755849888884
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755849897625
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755849940110
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755849948480
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755849957128
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755849965236
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755849974225
   }
 ]
