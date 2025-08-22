@@ -11,37 +11,34 @@ export interface AnalysisRecord {
 
 const storagePath = path.join(process.cwd(), '.data');
 const dataFilePath = path.join(storagePath, 'analysis.json');
-const MAX_RECORDS = 1000;
 
 async function ensureStorage(): Promise<AnalysisRecord[]> {
   try {
     await fs.mkdir(storagePath, { recursive: true });
     const data = await fs.readFile(dataFilePath, 'utf-8');
-    return JSON.parse(data);
+    // Ensure we always return an array, even if the file is empty or malformed
+    const parsed = JSON.parse(data);
+    return Array.isArray(parsed) ? parsed : [];
   } catch (error: any) {
     if (error.code === 'ENOENT') {
+      // If file doesn't exist, create it with an empty array
       await fs.writeFile(dataFilePath, '[]', 'utf-8');
       return [];
     }
     console.error('Error reading storage:', error);
+    // In case of other errors, default to an empty array
     return [];
   }
 }
 
-async function writeRecords(records: AnalysisRecord[]): Promise<void> {
-    await fs.writeFile(dataFilePath, JSON.stringify(records, null, 2), 'utf-8');
+async function writeRecord(record: AnalysisRecord): Promise<void> {
+    // Overwrite the file with an array containing only the single, latest record.
+    await fs.writeFile(dataFilePath, JSON.stringify([record], null, 2), 'utf-8');
 }
 
 export async function addAnalysis(record: Omit<AnalysisRecord, 'timestamp'>) {
-  const records = await ensureStorage();
-  
-  records.push({ ...record, timestamp: Date.now() });
-
-  if (records.length > MAX_RECORDS) {
-    records.shift();
-  }
-  
-  await writeRecords(records);
+  const newRecord = { ...record, timestamp: Date.now() };
+  await writeRecord(newRecord);
 }
 
 export async function getLatestAnalysis(): Promise<AnalysisRecord | null> {
@@ -49,28 +46,6 @@ export async function getLatestAnalysis(): Promise<AnalysisRecord | null> {
     if (records.length === 0) {
         return null;
     }
-    return records[records.length - 1];
-}
-
-export async function getAggregatedAnalysis(seconds: number = 10) {
-  const records = await ensureStorage();
-  const now = Date.now();
-  const cutoff = now - (seconds * 1000);
-
-  const recentRecords = records.filter(r => r.timestamp >= cutoff);
-
-  const aggregatedData: Record<Direction, number> = {
-    left: 0,
-    center: 0,
-    right: 0,
-    everywhere: 0,
-  };
-
-  for (const record of recentRecords) {
-    if (aggregatedData[record.direction] !== undefined) {
-      aggregatedData[record.direction]++;
-    }
-  }
-
-  return aggregatedData;
+    // The file should only contain one record, which is the latest.
+    return records[0];
 }
