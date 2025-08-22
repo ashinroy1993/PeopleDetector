@@ -22,7 +22,7 @@ export async function analyzeFrame(
         detectedPeopleCount: personCount,
       });
       
-      addAnalysis({ direction, confidence });
+      await addAnalysis({ direction, confidence });
       
       return { personCount, direction, confidence };
     }

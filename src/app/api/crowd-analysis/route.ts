@@ -1,9 +1,11 @@
 import { getAggregatedAnalysis } from "@/lib/storage";
 import { NextResponse } from "next/server";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
-    const data = getAggregatedAnalysis();
+    const data = await getAggregatedAnalysis();
     
     let dominantDirection = "front";
     let maxCount = 0;
