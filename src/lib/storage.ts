@@ -42,7 +42,8 @@ export async function addAnalysis(record: Omit<AnalysisRecord, 'timestamp'>): Pr
 export async function getLatestAnalysis(): Promise<AnalysisRecord | null> {
   try {
     const blobUrl = (await head(BLOB_FILENAME, { token: BLOB_READ_WRITE_TOKEN })).url;
-    const response = await fetch(blobUrl);
+    // Use fetch with 'no-store' to prevent caching
+    const response = await fetch(blobUrl, { cache: 'no-store' });
 
     if (response.ok) {
         return await response.json();
