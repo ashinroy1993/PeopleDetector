@@ -12,7 +12,7 @@ export async function GET() {
 
     // Handle case with no recent data
     if (Object.values(data).every(count => count === 0)) {
-        return NextResponse.json({ Crowd: "Center" });
+        return NextResponse.json({ position: "Center" });
     }
 
     // Convert to array and sort to handle ties consistently (e.g., alphabetically)
@@ -28,7 +28,7 @@ export async function GET() {
     const capitalizedDirection =
       dominantDirection.charAt(0).toUpperCase() + dominantDirection.slice(1);
 
-    return NextResponse.json({ Crowd: capitalizedDirection });
+    return NextResponse.json({ position: capitalizedDirection });
   } catch (error) {
     console.error("Failed to get aggregated analysis:", error);
     return NextResponse.json(

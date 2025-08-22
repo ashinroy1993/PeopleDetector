@@ -1258,5 +1258,10 @@
     "direction": "center",
     "confidence": 1,
     "timestamp": 1755899671665
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755899821421
   }
 ]
