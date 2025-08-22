@@ -22,7 +22,7 @@ export async function analyzeFrame(
       return { personCount, direction, confidence };
     }
 
-    return { personCount: 0, direction: 'front', confidence: 0 };
+    return { personCount: 0, direction: 'everywhere', confidence: 0 };
   } catch (error) {
     console.error("Error analyzing frame:", error);
     throw new Error("Failed to analyze frame.");

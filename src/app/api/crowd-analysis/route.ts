@@ -7,12 +7,12 @@ export async function GET() {
   try {
     const data = await getAggregatedAnalysis(10); // Analyze the last 10 seconds
     
-    let dominantDirection = "front";
+    let dominantDirection = "center";
     let maxCount = 0;
 
     // Handle case with no recent data
     if (Object.values(data).every(count => count === 0)) {
-        return NextResponse.json({ Crowd: "Front" });
+        return NextResponse.json({ Crowd: "Center" });
     }
 
     // Convert to array and sort to handle ties consistently (e.g., alphabetically)

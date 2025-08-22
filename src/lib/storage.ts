@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 
-type Direction = 'left' | 'front' | 'right' | 'everywhere';
+type Direction = 'left' | 'center' | 'right' | 'everywhere';
 
 interface AnalysisRecord {
   direction: Direction;
@@ -53,7 +53,7 @@ export async function getAggregatedAnalysis(seconds: number = 10) {
 
   const aggregatedData: Record<Direction, number> = {
     left: 0,
-    front: 0,
+    center: 0,
     right: 0,
     everywhere: 0,
   };
