@@ -5,10 +5,15 @@ export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
-    const data = await getAggregatedAnalysis();
+    const data = await getAggregatedAnalysis(10); // Analyze the last 10 seconds
     
     let dominantDirection = "front";
-    let maxCount = -1; // Initialize with -1 to handle empty data case correctly
+    let maxCount = 0;
+
+    // Handle case with no recent data
+    if (Object.values(data).every(count => count === 0)) {
+        return NextResponse.json({ Crowd: "Front" });
+    }
 
     // Convert to array and sort to handle ties consistently (e.g., alphabetically)
     const sortedDirections = Object.entries(data).sort((a, b) => a[0].localeCompare(b[0]));

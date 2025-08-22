@@ -44,8 +44,13 @@ export async function addAnalysis(record: Omit<AnalysisRecord, 'timestamp'>) {
   await writeRecords(records);
 }
 
-export async function getAggregatedAnalysis() {
+export async function getAggregatedAnalysis(seconds: number = 10) {
   const records = await ensureStorage();
+  const now = Date.now();
+  const cutoff = now - (seconds * 1000);
+
+  const recentRecords = records.filter(r => r.timestamp >= cutoff);
+
   const aggregatedData: Record<Direction, number> = {
     left: 0,
     front: 0,
@@ -53,7 +58,7 @@ export async function getAggregatedAnalysis() {
     everywhere: 0,
   };
 
-  for (const record of records) {
+  for (const record of recentRecords) {
     if (aggregatedData[record.direction] !== undefined) {
       aggregatedData[record.direction]++;
     }

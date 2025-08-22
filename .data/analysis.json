@@ -748,5 +748,175 @@
     "direction": "left",
     "confidence": 1,
     "timestamp": 1755850659815
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850772035
+  },
+  {
+    "direction": "left",
+    "confidence": 0.6,
+    "timestamp": 1755850797563
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850845067
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850848835
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850853231
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850857252
+  },
+  {
+    "direction": "front",
+    "confidence": 0.6,
+    "timestamp": 1755850861101
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850864825
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850869258
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850872727
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850877653
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850880947
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850886034
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850888823
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850894454
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850897712
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850902422
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850905754
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850910339
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850913897
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850918523
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850921767
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850926440
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850929705
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850934408
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850938236
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850942526
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850946417
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850950645
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850954399
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755850958635
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850962273
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850966668
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850970598
   }
 ]
