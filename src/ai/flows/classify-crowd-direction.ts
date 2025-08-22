@@ -45,11 +45,9 @@ const prompt = ai.definePrompt({
   name: 'classifyCrowdDirectionPrompt',
   input: {schema: ClassifyCrowdDirectionInputSchema},
   output: {schema: ClassifyCrowdDirectionOutputSchema},
-  prompt: `You are an expert in analyzing larger crowd position from video frames. Given a frame from a camera feed and the number of people detected, you will classify the dominant position of people.
+  prompt: `You are an expert in analyzing crowd distribution in video frames. Your task is to identify where the largest group of people is located within the frame. The output should be one of 'left', 'front', 'right', or 'everywhere'.
 
-  The direction can be one of the following: left, front, right, or everywhere.
-
-  Consider the overall frame of the detected people to determine the primary position.
+  Base your analysis on the spatial position of the people in the image, not the direction they are facing. Determine which area of the frame (left, front/center, right) contains the most individuals. If people are spread out across the entire frame, classify it as 'everywhere'.
 
   Frame: {{media url=frameDataUri}}
   Number of People Detected: {{{detectedPeopleCount}}}
