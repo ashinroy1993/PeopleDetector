@@ -8,9 +8,12 @@ export async function GET() {
     const data = await getAggregatedAnalysis();
     
     let dominantDirection = "front";
-    let maxCount = 0;
+    let maxCount = -1; // Initialize with -1 to handle empty data case correctly
 
-    for (const [direction, count] of Object.entries(data)) {
+    // Convert to array and sort to handle ties consistently (e.g., alphabetically)
+    const sortedDirections = Object.entries(data).sort((a, b) => a[0].localeCompare(b[0]));
+
+    for (const [direction, count] of sortedDirections) {
       if (count > maxCount) {
         maxCount = count;
         dominantDirection = direction;
