@@ -48,7 +48,7 @@ export default function CrowdAnalysisClient() {
     try {
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: "environment" },
+          video: true,
         });
         streamRef.current = stream;
         if (videoRef.current) {
@@ -67,7 +67,7 @@ export default function CrowdAnalysisClient() {
     } catch (err) {
       console.error("Error accessing camera:", err);
       let message = "Could not access the camera.";
-      if (err instanceof Error && err.name === "NotAllowedError") {
+      if (err instanceof Error && (err.name === "NotAllowedError" || err.name === "PermissionDeniedError")) {
         message = "Camera permission denied. Please enable it in your browser settings.";
       }
       toast({
