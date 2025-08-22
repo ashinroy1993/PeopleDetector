@@ -16,7 +16,7 @@ import {
   Loader2,
 } from "lucide-react";
 
-const ANALYSIS_INTERVAL = 2000; // 2 seconds
+const ANALYSIS_INTERVAL = 5000; // 5 seconds
 
 export default function CrowdAnalysisClient() {
   const [isCameraOn, setIsCameraOn] = useState(false);
@@ -48,7 +48,7 @@ export default function CrowdAnalysisClient() {
     try {
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: true,
+          video: { facingMode: "user" },
         });
         streamRef.current = stream;
         if (videoRef.current) {
