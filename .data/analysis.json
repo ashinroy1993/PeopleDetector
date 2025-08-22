@@ -1263,5 +1263,75 @@
     "direction": "left",
     "confidence": 1,
     "timestamp": 1755899821421
+  },
+  {
+    "direction": "everywhere",
+    "confidence": 1,
+    "timestamp": 1755899839710
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899897868
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899902447
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899905196
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899909582
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899912475
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899916565
+  },
+  {
+    "direction": "right",
+    "confidence": 1,
+    "timestamp": 1755899919641
+  },
+  {
+    "direction": "right",
+    "confidence": 1,
+    "timestamp": 1755899923614
+  },
+  {
+    "direction": "right",
+    "confidence": 1,
+    "timestamp": 1755899926828
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899930896
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755899933802
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755899937883
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899941015
   }
 ]

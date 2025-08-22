@@ -1,36 +1,24 @@
-import { getAggregatedAnalysis } from "@/lib/storage";
+import { getLatestAnalysis } from "@/lib/storage";
 import { NextResponse } from "next/server";
 
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
-    const data = await getAggregatedAnalysis(10); // Analyze the last 10 seconds
+    const latest = await getLatestAnalysis();
     
-    let dominantDirection = "center";
-    let maxCount = 0;
+    let currentPosition = "Everywhere";
 
-    // Handle case with no recent data
-    if (Object.values(data).every(count => count === 0)) {
-        return NextResponse.json({ position: "Center" });
+    if (latest) {
+        currentPosition = latest.direction;
     }
 
-    // Convert to array and sort to handle ties consistently (e.g., alphabetically)
-    const sortedDirections = Object.entries(data).sort((a, b) => a[0].localeCompare(b[0]));
+    const capitalizedPosition =
+      currentPosition.charAt(0).toUpperCase() + currentPosition.slice(1);
 
-    for (const [direction, count] of sortedDirections) {
-      if (count > maxCount) {
-        maxCount = count;
-        dominantDirection = direction;
-      }
-    }
-
-    const capitalizedDirection =
-      dominantDirection.charAt(0).toUpperCase() + dominantDirection.slice(1);
-
-    return NextResponse.json({ position: capitalizedDirection });
+    return NextResponse.json({ position: capitalizedPosition });
   } catch (error) {
-    console.error("Failed to get aggregated analysis:", error);
+    console.error("Failed to get latest analysis:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }

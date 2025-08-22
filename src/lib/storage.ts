@@ -3,7 +3,7 @@ import path from 'path';
 
 type Direction = 'left' | 'center' | 'right' | 'everywhere';
 
-interface AnalysisRecord {
+export interface AnalysisRecord {
   direction: Direction;
   confidence: number;
   timestamp: number;
@@ -42,6 +42,14 @@ export async function addAnalysis(record: Omit<AnalysisRecord, 'timestamp'>) {
   }
   
   await writeRecords(records);
+}
+
+export async function getLatestAnalysis(): Promise<AnalysisRecord | null> {
+    const records = await ensureStorage();
+    if (records.length === 0) {
+        return null;
+    }
+    return records[records.length - 1];
 }
 
 export async function getAggregatedAnalysis(seconds: number = 10) {
