@@ -1,12 +1,11 @@
 "use server";
 
-import { detectPeople } from "@/ai/flows/detect-people";
 import { classifyCrowdDirection } from "@/ai/flows/classify-crowd-direction";
 import { addAnalysis } from "@/lib/storage";
 
 export type AnalysisResult = {
   personCount: number;
-  direction: "left" | "front" | "right" | "everywhere";
+  direction: "left" | "center" | "right" | "everywhere";
   confidence: number;
 };
 
@@ -14,16 +13,12 @@ export async function analyzeFrame(
   frameDataUri: string
 ): Promise<AnalysisResult> {
   try {
-    const { personCount } = await detectPeople({ photoDataUri: frameDataUri });
+    const { personCount, direction, confidence } = await classifyCrowdDirection({
+      frameDataUri,
+    });
 
     if (personCount > 0) {
-      const { direction, confidence } = await classifyCrowdDirection({
-        frameDataUri,
-        detectedPeopleCount: personCount,
-      });
-      
       await addAnalysis({ direction, confidence });
-      
       return { personCount, direction, confidence };
     }
 

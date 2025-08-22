@@ -1,9 +1,9 @@
 'use server';
 
 /**
- * @fileOverview Classifies the dominant direction of movement in a camera feed.
+ * @fileOverview Analyzes a camera frame to count people and classify their dominant direction.
  *
- * - classifyCrowdDirection - A function that classifies the crowd direction.
+ * - classifyCrowdDirection - A function that handles the crowd analysis process.
  * - ClassifyCrowdDirectionInput - The input type for the classifyCrowdDirection function.
  * - ClassifyCrowdDirectionOutput - The return type for the classifyCrowdDirection function.
  */
@@ -17,15 +17,13 @@ const ClassifyCrowdDirectionInputSchema = z.object({
     .describe(
       "A frame from the camera feed, as a data URI that must include a MIME type and use Base64 encoding. Expected format: 'data:<mimetype>;base64,<encoded_data>'"
     ),
-  detectedPeopleCount: z
-    .number()
-    .describe('The number of people detected in the frame.'),
 });
 export type ClassifyCrowdDirectionInput = z.infer<typeof ClassifyCrowdDirectionInputSchema>;
 
 const ClassifyCrowdDirectionOutputSchema = z.object({
+  personCount: z.number().describe('The number of people detected in the image.'),
   direction: z
-    .enum(['left', 'front', 'right', 'everywhere'])
+    .enum(['left', 'center', 'right', 'everywhere'])
     .describe('The position in frame where larger number of people are present'),
   confidence: z
     .number()
@@ -45,19 +43,19 @@ const prompt = ai.definePrompt({
   name: 'classifyCrowdDirectionPrompt',
   input: {schema: ClassifyCrowdDirectionInputSchema},
   output: {schema: ClassifyCrowdDirectionOutputSchema},
-  prompt: `You are an expert in analyzing crowd distribution in video frames. Your task is to identify where the largest group of people is located.
+  prompt: `You are an expert in analyzing crowd distribution in video frames. Your task is to count the number of people and identify where the largest group is located.
 
-  1.  Mentally divide the frame vertically into three equal sections: 'left', 'front' (the center section), and 'right'.
-  2.  Count the number of people whose center of mass falls into each of the three sections.
-  3.  Determine which section contains the most people. This is the dominant direction.
-  4.  If people are distributed roughly evenly across all three sections, or if you cannot confidently place the majority in one section, classify the direction as 'everywhere'.
+  1.  Count the total number of people visible in the frame.
+  2.  Mentally divide the frame vertically into three equal sections: 'left', 'center', and 'right'.
+  3.  Count the number of people whose center of mass falls into each of the three sections.
+  4.  Determine which section contains the most people. This is the dominant position.
+  5.  If people are distributed roughly evenly across all three sections, or if you cannot confidently place the majority in one section, classify the direction as 'everywhere'.
 
   Base your analysis solely on the spatial position of people in the image, not the direction they are facing.
 
   Frame: {{media url=frameDataUri}}
-  Number of People Detected: {{{detectedPeopleCount}}}
 
-  Position Classification:`,
+  Analysis:`,
 });
 
 const classifyCrowdDirectionFlow = ai.defineFlow(

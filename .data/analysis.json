@@ -918,5 +918,200 @@
     "direction": "left",
     "confidence": 1,
     "timestamp": 1755850970598
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850976101
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850980482
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850984255
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850988571
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850992120
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755850997264
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755851000130
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755851045213
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755851053919
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755851062053
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755898902087
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755898910766
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755898919108
+  },
+  {
+    "direction": "front",
+    "confidence": 1,
+    "timestamp": 1755898927560
+  },
+  {
+    "direction": "right",
+    "confidence": 1,
+    "timestamp": 1755898935974
+  },
+  {
+    "direction": "right",
+    "confidence": 1,
+    "timestamp": 1755898944158
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899103604
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899112211
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899121478
+  },
+  {
+    "direction": "right",
+    "confidence": 1,
+    "timestamp": 1755899129997
+  },
+  {
+    "direction": "right",
+    "confidence": 1,
+    "timestamp": 1755899138366
+  },
+  {
+    "direction": "left",
+    "confidence": 1,
+    "timestamp": 1755899146508
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899154804
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899163026
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899173800
+  },
+  {
+    "direction": "right",
+    "confidence": 1,
+    "timestamp": 1755899182749
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899191003
+  },
+  {
+    "direction": "right",
+    "confidence": 1,
+    "timestamp": 1755899199107
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899207794
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899215953
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899224197
+  },
+  {
+    "direction": "right",
+    "confidence": 1,
+    "timestamp": 1755899232540
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899240592
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899249209
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899257552
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899265778
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899274068
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899282495
+  },
+  {
+    "direction": "center",
+    "confidence": 1,
+    "timestamp": 1755899290767
   }
 ]
