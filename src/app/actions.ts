@@ -22,6 +22,7 @@ export async function analyzeFrame(
       return { personCount, direction, confidence };
     }
 
+    await addAnalysis({ direction: 'everywhere', confidence: 0 });
     return { personCount: 0, direction: 'everywhere', confidence: 0 };
   } catch (error) {
     console.error("Error analyzing frame:", error);
