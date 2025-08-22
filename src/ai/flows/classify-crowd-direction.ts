@@ -46,7 +46,7 @@ const prompt = ai.definePrompt({
   prompt: `You are an expert in analyzing crowd distribution in video frames. Your task is to count the number of people and identify where the largest group is located.
 
   1.  Count the total number of people visible in the frame.
-  2.  Mentally divide the frame vertically into three equal sections: 'left', 'center', and 'right'.
+  2.  Mentally divide the frame vertically into three sections: 'left', 'center', and 'right' with 40:20:40 ratio.
   3.  Count the number of people whose center of mass falls into each of the three sections.
   4.  Determine which section contains the most people. This is the dominant position.
   5.  If people are distributed roughly evenly across all three sections, or if you cannot confidently place the majority in one section, classify the direction as 'everywhere'.
