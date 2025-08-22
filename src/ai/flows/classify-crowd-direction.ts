@@ -15,7 +15,7 @@ const ClassifyCrowdDirectionInputSchema = z.object({
   frameDataUri: z
     .string()
     .describe(
-      "A frame from the camera feed, as a data URI that must include a MIME type and use Base64 encoding. Expected format: 'data:<mimetype>;base64,<encoded_data>'."
+      "A frame from the camera feed, as a data URI that must include a MIME type and use Base64 encoding. Expected format: 'data:<mimetype>;base64,<encoded_data>'"
     ),
   detectedPeopleCount: z
     .number()
@@ -26,12 +26,12 @@ export type ClassifyCrowdDirectionInput = z.infer<typeof ClassifyCrowdDirectionI
 const ClassifyCrowdDirectionOutputSchema = z.object({
   direction: z
     .enum(['left', 'front', 'right', 'everywhere'])
-    .describe('The dominant direction of movement.'),
+    .describe('The position in frame where larger number of people are present'),
   confidence: z
     .number()
     .min(0)
     .max(1)
-    .describe('The confidence score of the direction classification.'),
+    .describe('The confidence score of the maximum number of people in provided position.'),
 });
 export type ClassifyCrowdDirectionOutput = z.infer<typeof ClassifyCrowdDirectionOutputSchema>;
 
@@ -45,16 +45,16 @@ const prompt = ai.definePrompt({
   name: 'classifyCrowdDirectionPrompt',
   input: {schema: ClassifyCrowdDirectionInputSchema},
   output: {schema: ClassifyCrowdDirectionOutputSchema},
-  prompt: `You are an expert in analyzing crowd movement from video frames. Given a frame from a camera feed and the number of people detected, you will classify the dominant direction of movement.
+  prompt: `You are an expert in analyzing larger crowd position from video frames. Given a frame from a camera feed and the number of people detected, you will classify the dominant position of people.
 
   The direction can be one of the following: left, front, right, or everywhere.
 
-  Consider the overall movement trends of the detected people to determine the primary direction.
+  Consider the overall frame of the detected people to determine the primary position.
 
   Frame: {{media url=frameDataUri}}
   Number of People Detected: {{{detectedPeopleCount}}}
 
-  Direction Classification:`,
+  Position Classification:`,
 });
 
 const classifyCrowdDirectionFlow = ai.defineFlow(
